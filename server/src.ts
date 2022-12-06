@@ -8,7 +8,11 @@ export async function translateWord(text: string): Promise<string> {
       body: JSON.stringify({ q: text, target: "en", source: "fr" }),
     }
   ).then((res) => res.json());
-  if (data) return data.translations[0].translatedText as string;
+  if (data) {
+    const translation: string = data.translations[0].translatedText;
+    console.log("word", text, "translation", translation);
+    return translation;
+  }
   return "";
 }
 

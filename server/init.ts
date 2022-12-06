@@ -7,9 +7,9 @@ type T_WORDS = string[];
 async function readWords(): Promise<T_WORDS> {
   return new Promise((resolve, reject) => {
     const file = "verbs.txt";
-    const stream = fs.createReadStream(file);
-    stream.on("error", reject);
-    const reader = readline.createInterface({ input: stream });
+    const input = fs.createReadStream(file);
+    input.on("error", reject);
+    const reader = readline.createInterface({ input });
     const array: T_WORDS = [];
     reader.on("line", (line) => array.push(line));
     reader.on("close", () => resolve(array));

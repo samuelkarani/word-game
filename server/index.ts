@@ -31,7 +31,8 @@ app.post("/failure", async (req: Request, res: Response) => {
   res.status(200).end();
 });
 
-app.listen(port, async () => {
-  await init();
-  console.log(`Server is running at https://localhost:${port}`);
+init().then(() => {
+  app.listen(port, async () => {
+    console.log(`Server is running at https://localhost:${port}`);
+  });
 });
