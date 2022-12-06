@@ -5,7 +5,7 @@ import serviceAccount from "./.google.json";
 
 initializeApp({
   credential: cert(serviceAccount),
-  databaseURL: "https://samiezkay-dacd9.firebaseio.com",
+  databaseURL: process.env.DATABASE_URL,
 });
 const db = getFirestore();
 const wordsRef = db.collection("words");
@@ -38,14 +38,16 @@ export async function addWords(words: string[]): Promise<void> {
 }
 
 export async function fetchWord(score: number): Promise<string> {
+  const value = Math.floor(score / 5) * 5;
   const snapshot = await wordsRef
-    .where("score", ">=", score)
-    .where("score", "<", score + 5)
+    .where("score", ">=", value)
+    .where("score", "<", value + 5)
     .get();
   const data: T_DATA[] = [];
   snapshot.forEach((doc) => {
     data.push(doc.data() as T_DATA);
   });
+  console.log(`score: ${score} value: ${value} words: ${data.length}`);
   const item = randomItem(data);
   return item.word;
 }

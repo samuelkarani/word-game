@@ -1,7 +1,7 @@
 ### setup
 
-1. setup .env file with GCP api key as GOOGLE_API_KEY
-1. setup .google file from a GCP service account file
+1. setup `.env` file with GCP api key as `GOOGLE_API_KEY` and firestore database url as `DATABASE_URL`
+1. setup `.google` file from a GCP service account file
 1. run `npm install` to install dependencies
 
 ### scripts
