@@ -30,7 +30,8 @@ export async function addWords(words: string[]): Promise<void> {
 
   for (const word of words) {
     const ref = wordsRef.doc(word);
-    batch.set(ref, { word, score: getScore(word), success: 0, failure: 0 });
+    const data = { word, score: getScore(word), success: 0, failure: 0 };
+    batch.set(ref, data);
     count += 1;
     if (count === batchLimit) {
       console.log("running batch", count);
